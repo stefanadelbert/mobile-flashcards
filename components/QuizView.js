@@ -1,39 +1,28 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {
     StyleSheet,
     Text,
+    TouchableOpacity,
     View,
 } from 'react-native';
 import {
     Button,
+    ButtonGroup,
+    Card,
     Divider,
 } from 'react-native-elements';
 
 import {white, grey, red, blue} from '../utils/colors';
 
-export default class DeckView extends React.Component {
+export default class QuizView extends React.Component {
     render() {
         const {title, questions} = this.props.navigation.state.params;
         return (
             <View style={{justifyContent: "center", alignItems: "center"}}>
                 <View style={{marginTop: 30, marginBottom: 30}}>
-                    <Text style={styles.title}>{title}</Text>
-                    <Text style={styles.subtitle}>{questions.length} cards</Text>
                 </View>
-                <Button
-                    title={"Add Card"}
-                    onPress={() => this.props.navigation.navigate(
-                        'AddCard', {title}
-                    )} 
-                    buttonStyle={styles.button}
-                />
-                <Button
-                    title={"Start Quiz"}
-                    onPress={() => this.props.navigation.navigate(
-                        'Quiz', {title, questions}
-                    )} 
-                    buttonStyle={styles.button}
-                />
+                <Divider />
             </View>
         );
     }
@@ -57,3 +46,4 @@ const styles = StyleSheet.create({
         margin: 10,
     }
 })
+

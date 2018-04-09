@@ -7,6 +7,8 @@ import {StackNavigator} from 'react-navigation';
 import reducer from './reducers';
 import DeckListView from './components/DeckListView';
 import DeckView from './components/DeckView';
+import QuizView from './components/QuizView';
+import AddCard from './components/AddCard';
 import {black, brand} from './utils/colors';
 
 const navigationOptions = {
@@ -18,11 +20,31 @@ const navigationOptions = {
 const MainNavigator = StackNavigator({
     DeckList: {
         screen: DeckListView,
-        navigationOptions 
+        navigationOptions: {
+            ...navigationOptions,
+            title: "Flashcards"
+        }
     },
     Deck: {
         screen: DeckView,
-        navigationOptions
+        navigationOptions: ({navigation}) => ({
+            ...navigationOptions,
+            title: `${navigation.state.params.title}`
+        })
+    },
+    Quiz: {
+        screen: QuizView,
+        navigationOptions: ({navigation}) => ({
+            ...navigationOptions,
+            title: `Quiz for ${navigation.state.params.title}`
+        })
+    },
+    AddCard: {
+        screen: AddCard,
+        navigationOptions: ({navigation}) => ({
+            ...navigationOptions,
+            title: `Add card to ${navigation.state.params.title}`
+        })
     }
 })
 

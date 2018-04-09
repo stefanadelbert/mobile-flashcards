@@ -6,8 +6,9 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
+import {Card} from 'react-native-elements';
 
-import {grey, red, blue} from '../utils/colors';
+import {grey} from '../utils/colors';
 
 class DeckListView extends React.Component {
     render() {
@@ -22,10 +23,11 @@ class DeckListView extends React.Component {
                                 'Deck', {title, questions}
                             )} 
                         >
-                            <View style={styles.deckContainer}>
-                                <Text style={styles.deckTitle}>{title}</Text>
-                                <Text style={styles.cardCount}>{questions.length} cards</Text>
-                            </View>
+                            <Card title={title}>
+                                <View style={{alignItems: "center"}}>
+                                    <Text style={{color: grey}}>{questions.length} cards</Text>
+                                </View>
+                            </Card>
                         </TouchableOpacity>
                     )
                 })}
@@ -33,23 +35,6 @@ class DeckListView extends React.Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    deckContainer: {
-        borderBottomWidth: 1,
-        borderBottomColor: grey,
-        alignItems: "center",
-        paddingTop: 30,
-        paddingBottom: 30,
-    },
-    deckTitle: {
-        fontSize: 18,
-    },
-    cardCount: {
-        color: grey,
-        fontSize: 12,
-    }
-})
 
 function mapStateToProps (state) {
     return {

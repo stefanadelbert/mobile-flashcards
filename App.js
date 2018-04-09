@@ -7,21 +7,23 @@ import {StackNavigator} from 'react-navigation';
 import reducer from './reducers';
 import DeckListView from './components/DeckListView';
 import DeckView from './components/DeckView';
-import {white, purple} from './utils/colors';
+import {black, brand} from './utils/colors';
 
-const MainNavigator = StackNavigator({
-  DeckList: {
-    screen: DeckListView,
-  },
-  Deck: {
-    screen: DeckView,
-    navigationOptions: {
-      headerTintColor: white,
-      headerStyle: {
-        backgroundColor: purple,
-      }
+const navigationOptions = {
+    headerTintColor: black,
+    headerStyle: {
+        backgroundColor: brand,
     }
-  }
+}
+const MainNavigator = StackNavigator({
+    DeckList: {
+        screen: DeckListView,
+        navigationOptions 
+    },
+    Deck: {
+        screen: DeckView,
+        navigationOptions
+    }
 })
 
 export default class App extends React.Component {

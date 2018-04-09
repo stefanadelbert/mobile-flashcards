@@ -6,30 +6,35 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
+import {
+    Button,
+    ButtonGroup,
+    Card,
+    Divider,
+} from 'react-native-elements';
 
 import {white, grey, red, blue} from '../utils/colors';
-
-function Button({onPress, children}) {
-  return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
-        <Text style={styles.buttonText}>{children}</Text>
-    </TouchableOpacity>
-  )
-}
 
 export default class DeckView extends React.Component {
     render() {
         const {title, questions} = this.props.navigation.state.params;
         return (
-            <View style={styles.viewContainer}>
-                <View style={styles.header}>
-                    <Text style={styles.deckTitle}>{title}</Text>
-                    <Text style={styles.cardCount}>{questions.length} cards</Text>
+            <View style={{justifyContent: "center", alignItems: "center"}}>
+                <View style={{marginTop: 30, marginBottom: 30}}>
+                    <Text style={styles.title}>{title}</Text>
+                    <Text style={styles.subtitle}>{questions.length} cards</Text>
                 </View>
-                <View>
-                    <Button>Add Card</Button>
-                    <Button>Start Quiz</Button>
-                </View>
+                <Divider />
+                <Button
+                    title={"Add Card"}
+                    onPress={() => console.log("Add Card")}
+                    buttonStyle={styles.button}
+                />
+                <Button
+                    title={"Start Quiz"}
+                    onPress={() => console.log("Start Quiz")}
+                    buttonStyle={styles.button}
+                />
             </View>
         );
     }
@@ -38,36 +43,18 @@ export default class DeckView extends React.Component {
 const styles = StyleSheet.create({
     viewContainer: {
         flex: 1,
-        justifyContent: "space-around",
-        alignItems: "center",
-        padding: 20,
-        backgroundColor: white
-    },
-    header: {
-        justifyContent: "space-around",
         alignItems: "center",
     },
-    deckTitle: {
+    title: {
+        fontSize: 36,
+    },
+    subtitle: {
         fontSize: 24,
-    },
-    cardCount: {
         color: grey,
-        fontSize: 18,
-    },
-    buttonGroup: {
-        justifyContent: "space-between",
-        alignItems: "center",
     },
     button: {
-        backgroundColor: white,
-        padding: 10,
-        paddingLeft: 30,
-        paddingRight: 30,
-        height: 45,
-        borderRadius: 2,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    buttonText: {
+        width: 100,
+        height: 30,
+        margin: 10,
     }
 })

@@ -21,7 +21,12 @@ const navigationOptions = {
 }
 const DecksNavigator = StackNavigator({
     DeckList: {
-        screen: DeckListView
+        screen: DeckListView,
+        navigationOptions: {
+            headerStyle: {
+                height: 0,
+            }
+        }
     },
     Deck: {
         screen: DeckView,

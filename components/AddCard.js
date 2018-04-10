@@ -7,7 +7,7 @@ import {
     FormInput,
 } from 'react-native-elements';
 
-import {addCard} from '../actions';
+import {addCardToDeck} from '../actions';
 
 class AddCard extends React.Component {
     state = {
@@ -15,11 +15,12 @@ class AddCard extends React.Component {
         answer: ""
     }
     submit = () => {
-        const {addCard, goBack} = this.props;
+        const {addCardToDeck, goBack} = this.props;
         const {title} = this.props.navigation.state.params;
         const {question, answer} = this.state;
+        console.log('AddCard.submit', title, question, answer);
 
-        addCard(title, {question, answer});
+        addCardToDeck(title, {question, answer});
         goBack();
     }
     render() {
@@ -37,10 +38,8 @@ class AddCard extends React.Component {
 }
 
 function mapDispatchToProps(dispatch, { navigation }) {
-  const { entryId } = navigation.state.params
-
   return {
-    addCard: (title, card) => dispatch(addCard(title, card)),
+    addCardToDeck: (title, card) => dispatch(addCardToDeck(title, card)),
     goBack: () => navigation.goBack(),
   }
 }

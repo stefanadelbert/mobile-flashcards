@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {
     StyleSheet,
     Text,
@@ -11,9 +12,10 @@ import {
 
 import {white, grey, red, blue} from '../utils/colors';
 
-export default class DeckView extends React.Component {
+class DeckView extends React.Component {
     render() {
-        const {title, questions} = this.props.navigation.state.params;
+        const {title} = this.props.navigation.state.params;
+        const {questions} = this.props.deck;
         return (
             <View style={{justifyContent: "center", alignItems: "center"}}>
                 <View style={{marginTop: 30, marginBottom: 30}}>
@@ -57,3 +59,14 @@ const styles = StyleSheet.create({
         margin: 10,
     }
 })
+
+function mapStateToProps (state, props) {
+    const {title} = props.navigation.state.params;
+    return {
+        deck: state[title]
+    }
+}
+
+export default connect(
+  mapStateToProps
+)(DeckView)

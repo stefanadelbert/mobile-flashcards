@@ -1,4 +1,34 @@
-const defaultState = {
+import {
+    DECK_ADDED,
+    CARD_ADDED,
+} from '../actions';
+
+export default function entries(state = defaultDeckState, action) {
+    switch (action.type) {
+        case DECK_ADDED:
+            return {
+                ...state,
+                [action.deck]: {
+                    title: action.deck,
+                    questions: []
+
+                }
+            };
+        case CARD_ADDED:
+            const {title, questions} = state[action.deck];
+            return {
+                ...state,
+                [action.deck]: {
+                    title,
+                    questions: [...questions, action.card]
+                }
+            };
+        default:
+            return state;
+    }
+}
+
+const defaultDeckState = {
   React: {
     title: 'React',
     questions: [
@@ -21,12 +51,5 @@ const defaultState = {
       }
     ]
   }
-}
-
-export default function entries (state = defaultState, action) {
-    switch (action.type) {
-        default:
-            return state
-    }
 }
 

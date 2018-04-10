@@ -20,7 +20,7 @@ class DeckListView extends React.Component {
                         <TouchableOpacity
                             key={title} 
                             onPress={() => this.props.navigation.navigate(
-                                'Deck', {title, questions}
+                                'Deck', {title}
                             )} 
                         >
                             <Card title={title}>

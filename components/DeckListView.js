@@ -5,6 +5,7 @@ import {
     Text,
     TouchableOpacity,
     View,
+    FlatList,
 } from 'react-native';
 import {Card} from 'react-native-elements';
 
@@ -14,23 +15,25 @@ class DeckListView extends React.Component {
     render() {
         return (
             <View>
-                {Object.keys(this.props.decks).map(deckId => {
-                    const {title, questions} = this.props.decks[deckId];
-                    return (
-                        <TouchableOpacity
-                            key={title} 
-                            onPress={() => this.props.navigation.navigate(
-                                'Deck', {title}
-                            )} 
-                        >
-                            <Card title={title}>
-                                <View style={{alignItems: "center"}}>
-                                    <Text style={{color: grey}}>{questions.length} cards</Text>
-                                </View>
-                            </Card>
-                        </TouchableOpacity>
-                    )
-                })}
+                <FlatList
+                    data={Object.keys(this.props.decks)}
+                    renderItem={({item}) => {
+                        const {title, questions} = this.props.decks[item]
+                        return (
+                            <TouchableOpacity
+                                onPress={() => this.props.navigation.navigate(
+                                    'Deck', {title}
+                                )} 
+                            >
+                                <Card title={title}>
+                                    <View style={{alignItems: "center"}}>
+                                        <Text style={{color: grey}}>{questions.length} cards</Text>
+                                    </View>
+                                </Card>
+                            </TouchableOpacity>
+                        )
+                    }}
+                />
             </View>
         );
     }

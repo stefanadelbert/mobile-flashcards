@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {View, Text, TextInput} from 'react-native';
 import {
-    Button,
+    Icon,
     FormLabel,
     FormInput,
 } from 'react-native-elements';
@@ -24,6 +24,12 @@ class AddCard extends React.Component {
         goBack();
     }
     render() {
+        submitButton = <Icon
+            raised
+            name='check'
+            type='material'
+            onPress={this.submit} 
+        />
         const {title} = this.props.navigation.state.params;
         return (
             <View>
@@ -31,7 +37,9 @@ class AddCard extends React.Component {
                 <FormInput onChangeText={(question) => this.setState({question})}/>
                 <FormLabel>Answer</FormLabel>
                 <FormInput onChangeText={(answer) => this.setState({answer})}/>
-                <Button title="Submit" onPress={this.submit}/>
+                <View style={{flexDirection: "row", justifyContent: "flex-end", alignItems: "flex-end"}}>
+                    {submitButton}
+                </View>
             </View>
         );
     }

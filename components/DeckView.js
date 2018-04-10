@@ -6,8 +6,7 @@ import {
     View,
 } from 'react-native';
 import {
-    Button,
-    Divider,
+    Icon,
 } from 'react-native-elements';
 
 import {white, grey, red, blue} from '../utils/colors';
@@ -16,26 +15,32 @@ class DeckView extends React.Component {
     render() {
         const {title} = this.props.navigation.state.params;
         const {questions} = this.props.deck;
+        startQuizButton = <Icon
+            raised
+            name='play-arrow'
+            type='material'
+            onPress={() => this.props.navigation.navigate(
+                'Quiz', {title, questions}
+            )} 
+        />
+        addCardButton = <Icon
+            raised
+            name='add'
+            type='material'
+            onPress={() => this.props.navigation.navigate(
+                'AddCard', {title}
+            )} 
+        />
         return (
-            <View style={{justifyContent: "center", alignItems: "center"}}>
+            <View style={{flex: 1, alignItems: "stretch"}}>
                 <View style={{marginTop: 30, marginBottom: 30}}>
                     <Text style={styles.title}>{title}</Text>
                     <Text style={styles.subtitle}>{questions.length} cards</Text>
                 </View>
-                <Button
-                    title={"Add Card"}
-                    onPress={() => this.props.navigation.navigate(
-                        'AddCard', {title}
-                    )} 
-                    buttonStyle={styles.button}
-                />
-                <Button
-                    title={"Start Quiz"}
-                    onPress={() => this.props.navigation.navigate(
-                        'Quiz', {title, questions}
-                    )} 
-                    buttonStyle={styles.button}
-                />
+                <View style={{flexGrow: 1, flexDirection: "row", justifyContent: "flex-end", alignItems: "flex-end"}}>
+                    {addCardButton}
+                    {startQuizButton}
+                </View>
             </View>
         );
     }
@@ -48,16 +53,13 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 36,
+        textAlign: "center",
     },
     subtitle: {
         fontSize: 24,
+        textAlign: "center",
         color: grey,
     },
-    button: {
-        width: 100,
-        height: 30,
-        margin: 10,
-    }
 })
 
 function mapStateToProps (state, props) {

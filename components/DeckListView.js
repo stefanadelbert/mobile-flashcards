@@ -7,16 +7,28 @@ import {
     View,
     FlatList,
 } from 'react-native';
-import {Card} from 'react-native-elements';
+import {
+    Card,
+    Icon,
+} from 'react-native-elements';
 
 import {grey} from '../utils/colors';
 
 class DeckListView extends React.Component {
     render() {
+        const addDeckButton = <Icon
+            raised
+            name='add'
+            type='material'
+            onPress={() => this.props.navigation.navigate(
+                'AddDeck'
+            )} 
+        />
         return (
-            <View>
+            <View style={{flex: 1}}>
                 <FlatList
                     data={Object.keys(this.props.decks)}
+                    keyExtractor={(item) => item}
                     renderItem={({item}) => {
                         const {title, questions} = this.props.decks[item]
                         return (
@@ -25,7 +37,10 @@ class DeckListView extends React.Component {
                                     'Deck', {title}
                                 )} 
                             >
-                                <Card title={title}>
+                                <Card
+                                    title={title}
+                                    containerStyle={{borderBottomWidth: 5, borderRightWidth: 5}}
+                                >
                                     <View style={{alignItems: "center"}}>
                                         <Text style={{color: grey}}>{questions.length} cards</Text>
                                     </View>
@@ -34,6 +49,9 @@ class DeckListView extends React.Component {
                         )
                     }}
                 />
+                <View style={{flexGrow: 1, flexDirection: "row", justifyContent: "flex-end", alignItems: "flex-end"}}>
+                    {addDeckButton}
+                </View>
             </View>
         );
     }

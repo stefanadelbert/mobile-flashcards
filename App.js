@@ -19,14 +19,13 @@ const navigationOptions = {
         backgroundColor: brand,
     }
 }
-const DecksNavigator = StackNavigator({
+const MainNavigator = StackNavigator({
     DeckList: {
         screen: DeckListView,
-        navigationOptions: {
-            headerStyle: {
-                height: 0,
-            }
-        }
+        navigationOptions: ({navigation}) => ({
+            ...navigationOptions,
+            title: "Decks"
+        })
     },
     Deck: {
         screen: DeckView,
@@ -42,32 +41,19 @@ const DecksNavigator = StackNavigator({
             title: `Quiz for ${navigation.state.params.title}`
         })
     },
+    AddDeck: {
+        screen: AddDeck,
+        navigationOptions: ({navigation}) => ({
+            ...navigationOptions,
+            title: "Add Deck",
+        })
+    },
     AddCard: {
         screen: AddCard,
         navigationOptions: ({navigation}) => ({
             ...navigationOptions,
             title: `Add card to ${navigation.state.params.title}`
         })
-    }
-})
-
-
-const MainNavigator = TabNavigator({
-    Decks: {
-        screen: DecksNavigator,
-        navigationOptions: {
-            tabBarLabel: 'Decks',
-        },
-    },
-    AddDeck: {
-        screen: AddDeck,
-        navigationOptions: {
-            tabBarLabel: 'Add Deck',
-        },
-    },
-}, {
-    navigationOptions: {
-        header: null
     }
 })
 

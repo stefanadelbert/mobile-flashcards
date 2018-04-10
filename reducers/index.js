@@ -10,8 +10,8 @@ export default function entries(state = defaultDeckState, action) {
                 ...state,
                 [action.deck]: {
                     title: action.deck,
+                    description: action.description,
                     questions: []
-
                 }
             };
         case CARD_ADDED:
@@ -29,27 +29,29 @@ export default function entries(state = defaultDeckState, action) {
 }
 
 const defaultDeckState = {
-  React: {
-    title: 'React',
-    questions: [
-      {
-        question: 'What is React?',
-        answer: 'A library for managing user interfaces'
-      },
-      {
-        question: 'Where do you make Ajax requests in React?',
-        answer: 'The componentDidMount lifecycle event'
-      }
-    ]
-  },
-  JavaScript: {
-    title: 'JavaScript',
-    questions: [
-      {
-        question: 'What is a closure?',
-        answer: 'The combination of a function and the lexical environment within which that function was declared.'
-      }
-    ]
-  }
+    React: {
+        title: 'React',
+        description: 'All about React',
+        questions: [
+            {
+                question: 'What is React?',
+                answer: 'A library for managing user interfaces'
+            },
+            {
+                question: 'Where do you make Ajax requests in React?',
+                answer: 'The componentDidMount lifecycle event'
+            }
+        ]
+    },
+    JavaScript: {
+        title: 'JavaScript',
+        description: 'All about Javascript',
+        questions: [
+            {
+                question: 'What is a closure?',
+                answer: 'The combination of a function and the lexical environment within which that function was declared.'
+            }
+        ]
+    }
 }
 

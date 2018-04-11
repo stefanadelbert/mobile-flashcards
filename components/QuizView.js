@@ -189,7 +189,7 @@ export default class QuizView extends React.Component {
                 <FlatList
                     style={quizViewStyle.list}
                     data={questions}
-                    keyExtractor={(item, index) => index}
+                    keyExtractor={(item, index) => `${index}`}
                     renderItem={({item, index}) => (
                         <QuizCard
                             question={item.question}

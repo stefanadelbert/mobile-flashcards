@@ -16,6 +16,7 @@ import {grey} from '../utils/colors';
 
 class DeckListView extends React.Component {
     render() {
+        console.log('DeckListView.render', this.props.decks);
         const addDeckButton = <Icon
             raised
             name='add'

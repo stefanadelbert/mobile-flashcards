@@ -2,7 +2,16 @@ import * as API from '../utils/api';
 import uuidv4 from '../utils/helpers';
 
 export const DECK_ADDED = "DECK_ADDDED";
+export const DECKS_ADDED = "DECKS_ADDDED";
 export const CARD_ADDED = "CARD_ADDED";
+
+export function decksAdded(decks) {
+    console.log('actions.decksAdded', decks);
+    return {
+        type: DECKS_ADDED,
+        decks,
+    }
+}
 
 export function deckAdded(deck, description) {
     return {
@@ -28,4 +37,11 @@ export function addCardToDeck(deck, card) {
 export function addDeck(deck, description) {
     return dispatch => API.saveDeckTitle(deck, description)
         .then(() => dispatch(deckAdded(deck, description)));
+}
+
+export function loadDecks() {
+    console.log('loadDecks');
+    return (dispatch) => API.getDecks().then(
+        (decks) => dispatch(decksAdded(decks))
+    );
 }

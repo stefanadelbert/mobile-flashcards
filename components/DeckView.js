@@ -14,7 +14,7 @@ import {white, grey, red, blue} from '../utils/colors';
 class DeckView extends React.Component {
     render() {
         const {title} = this.props.navigation.state.params;
-        const {questions} = this.props.deck;
+        const {description, questions} = this.props.deck;
         startQuizButton = <Icon
             raised
             name='play-arrow'
@@ -36,6 +36,7 @@ class DeckView extends React.Component {
                 <View style={{marginTop: 30, marginBottom: 30}}>
                     <Text style={styles.title}>{title}</Text>
                     <Text style={styles.subtitle}>{questions.length} cards</Text>
+                    <Text style={styles.body}>{description}</Text>
                 </View>
                 <View style={{flexGrow: 1, flexDirection: "row", justifyContent: "flex-end", alignItems: "flex-end"}}>
                     {addCardButton}
@@ -58,6 +59,13 @@ const styles = StyleSheet.create({
     subtitle: {
         fontSize: 24,
         textAlign: "center",
+        color: grey,
+    },
+    body: {
+        fontSize: 18,
+        fontStyle: "italic",
+        textAlign: "justify",
+        margin: 50,
         color: grey,
     },
 })

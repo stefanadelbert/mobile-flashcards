@@ -1,10 +1,17 @@
 import {
     DECK_ADDED,
+    DECKS_ADDED,
     CARD_ADDED,
 } from '../actions';
 
-export default function entries(state = defaultDeckState, action) {
+export default function entries(state = {}, action) {
     switch (action.type) {
+        case DECKS_ADDED:
+            const newState = {
+                ...state,
+                ...action.decks
+            };
+            return newState;
         case DECK_ADDED:
             return {
                 ...state,
@@ -27,31 +34,3 @@ export default function entries(state = defaultDeckState, action) {
             return state;
     }
 }
-
-const defaultDeckState = {
-    React: {
-        title: 'React',
-        description: 'All about React',
-        questions: [
-            {
-                question: 'What is React?',
-                answer: 'A library for managing user interfaces'
-            },
-            {
-                question: 'Where do you make Ajax requests in React?',
-                answer: 'The componentDidMount lifecycle event'
-            }
-        ]
-    },
-    JavaScript: {
-        title: 'JavaScript',
-        description: 'All about Javascript',
-        questions: [
-            {
-                question: 'What is a closure?',
-                answer: 'The combination of a function and the lexical environment within which that function was declared.'
-            }
-        ]
-    }
-}
-

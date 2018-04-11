@@ -6,12 +6,15 @@ import {View} from 'react-native';
 import {TabNavigator, StackNavigator} from 'react-navigation';
 
 import reducer from './reducers';
+import {loadDecks} from './actions';
 import DeckListView from './components/DeckListView';
 import DeckView from './components/DeckView';
 import QuizView from './components/QuizView';
 import AddCard from './components/AddCard';
 import AddDeck from './components/AddDeck';
 import {black, brand} from './utils/colors';
+
+import LocalStorage from './components/LocalStorage';
 
 const navigationOptions = {
     headerTintColor: black,
@@ -57,6 +60,11 @@ const MainNavigator = StackNavigator({
     }
 })
 
+const DevNavigator = TabNavigator({
+  Home: { screen: MainNavigator },
+  Dev: { screen: LocalStorage },
+});
+
 const store = createStore(
     reducer,
     compose(
@@ -66,12 +74,14 @@ const store = createStore(
 	)
 );
 
+store.dispatch(loadDecks());
+
 export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
         <View style={{flex: 1}}>
-            <MainNavigator />
+            <DevNavigator />
         </View>
       </Provider>
     );

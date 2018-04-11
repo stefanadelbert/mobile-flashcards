@@ -12,6 +12,7 @@ import {
     Icon,
 } from 'react-native-elements';
 
+import {completeQuiz} from '../actions';
 import {white, grey, lightRed, red, lightGreen, green} from '../utils/colors';
 
 var Verdict = {
@@ -156,7 +157,7 @@ const QuizComplete = (props) => {
     </View>
 }
 
-export default class QuizView extends React.Component {
+class QuizView extends React.Component {
     state = {
         verdicts: []
     }
@@ -166,12 +167,15 @@ export default class QuizView extends React.Component {
         this.state.verdicts = questions.map(() => Verdict.UNKNOWN);
     }
     onChangeVerdict = (index, verdict) => {
-        this.setState({
-            verdicts: Object.assign([], this.state.verdicts, {[index]: verdict})
-        });
+        const newVerdicts = Object.assign([], this.state.verdicts, {[index]: verdict});
+        this.setState({verdicts: newVerdicts});
+        if (this.quizComplete(newVerdicts)) {
+            const {title} = this.props.navigation.state.params;
+            this.props.completeQuiz(title);
+        }
     }
-    quizComplete = () => {
-        return 0 == this.state.verdicts.reduce(
+    quizComplete = (verdicts) => {
+        return 0 == verdicts.reduce(
             (n, i) => n + (i === Verdict.UNKNOWN),
             0
         );
@@ -181,7 +185,7 @@ export default class QuizView extends React.Component {
     }
     render() {
         const {title, questions} = this.props.navigation.state.params;
-        if (this.quizComplete()) {
+        if (this.quizComplete(this.state.verdicts)) {
             return <View style={{flex: 1}}>
                 <QuizComplete
                     verdicts={this.state.verdicts}
@@ -209,6 +213,15 @@ export default class QuizView extends React.Component {
         );
     }
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    completeQuiz: (title, score) => dispatch(completeQuiz(title, score)),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(QuizView);
+
 const style =  StyleSheet.create({
     centered: {
         justifyContent: "center",

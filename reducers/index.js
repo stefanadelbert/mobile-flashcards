@@ -1,10 +1,13 @@
+import {combineReducers} from 'redux';
+
 import {
     DECKS_ADDED,
     DECK_ADDED,
     CARD_ADDED,
-} from '../actions';
+    QUIZ_COMPLETED,
+} from '../actions/types';
 
-export default function entries(state = {}, action) {
+function decks(state = {}, action) {
     switch (action.type) {
         case DECKS_ADDED:
             const newState = {
@@ -34,3 +37,24 @@ export default function entries(state = {}, action) {
             return state;
     }
 }
+
+function quiz(state = {}, action) {
+    switch (action.type) {
+        case QUIZ_COMPLETED: {
+            return {
+                ...state,
+                [action.deckId]: {
+                    date: action.date
+                }
+            }
+        }
+        default:
+            return state;
+    }
+}
+
+export default combineReducers({
+	decks,
+    quiz,
+});
+

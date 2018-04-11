@@ -4,3 +4,7 @@ export function uuidv4() {
     return v.toString(16);
   });
 }
+
+export function within24hrs(earlier, later) {
+    return (later - earlier) < (24 * 60 * 60 * 1000)
+}

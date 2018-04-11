@@ -12,7 +12,8 @@ import {
     Icon,
 } from 'react-native-elements';
 
-import {grey} from '../utils/colors';
+import {grey, brand} from '../utils/colors';
+import {within24hrs} from '../utils/helpers';
 
 class DeckListView extends React.Component {
     render() {
@@ -25,6 +26,11 @@ class DeckListView extends React.Component {
                 'AddDeck'
             )} 
         />
+        const alertButton = <Icon
+            name='warning'
+            type='material'
+            iconStyle={{color: brand}}
+        />
         return (
             <View style={{flex: 1}}>
                 <FlatList
@@ -32,6 +38,11 @@ class DeckListView extends React.Component {
                     keyExtractor={(item) => item}
                     renderItem={({item}) => {
                         const {title, questions} = this.props.decks[item]
+                        const displayAlert = (
+                            this.props.quiz === undefined ||
+                            !this.props.quiz.hasOwnProperty(title) ||
+                            !within24hrs(this.props.quiz[title].date, Date.now())
+                        );
                         return (
                             <TouchableOpacity
                                 onPress={() => this.props.navigation.navigate(
@@ -42,6 +53,9 @@ class DeckListView extends React.Component {
                                     title={title}
                                     containerStyle={{borderBottomWidth: 5, borderRightWidth: 5}}
                                 >
+                                    <View style={{position: "absolute", top: 0, right: 0}}>
+                                        {displayAlert && alertButton}
+                                    </View>
                                     <View style={{alignItems: "center"}}>
                                         <Text style={{color: grey}}>{questions.length} cards</Text>
                                     </View>
@@ -58,9 +72,10 @@ class DeckListView extends React.Component {
     }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps ({decks, quiz}) {
     return {
-        decks: state
+        decks,
+        quiz,
     }
 }
 

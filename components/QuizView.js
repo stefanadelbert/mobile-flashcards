@@ -13,6 +13,7 @@ import {
 } from 'react-native-elements';
 
 import {completeQuiz} from '../actions';
+import {clearLocalNotification} from '../utils/helpers';
 import {white, grey, lightRed, red, lightGreen, green} from '../utils/colors';
 
 var Verdict = {

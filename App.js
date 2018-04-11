@@ -12,6 +12,7 @@ import DeckView from './components/DeckView';
 import QuizView from './components/QuizView';
 import AddCard from './components/AddCard';
 import AddDeck from './components/AddDeck';
+import {setLocalNotification} from './utils/helpers';
 import {black, brand} from './utils/colors';
 
 import LocalStorage from './components/LocalStorage';
@@ -78,13 +79,17 @@ store.dispatch(loadDecks());
 store.dispatch(loadQuizzes());
 
 export default class App extends React.Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <View style={{flex: 1}}>
-            <DevNavigator />
-        </View>
-      </Provider>
-    );
-  }
+    constructor(props) {
+        super(props);
+        setLocalNotification();
+    }
+    render() {
+        return (
+            <Provider store={store}>
+                <View style={{flex: 1}}>
+                    <DevNavigator />
+                </View>
+            </Provider>
+        );
+    }
 }

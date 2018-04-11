@@ -6,8 +6,7 @@ import {
     QUIZZES_ADDED,
     QUIZ_COMPLETED,
 } from './types.js';
-import uuidv4 from '../utils/helpers';
-
+import {clearLocalNotification} from '../utils/helpers';
 
 export function decksAdded(decks) {
     return {
@@ -73,11 +72,10 @@ export function quizCompleted(deckId, date) {
 }
 
 export function completeQuiz(deckId) {
-    console.log('action.completeQuiz', deckId);
     const date = Date.now();
     return (dispatch) => {
-        API.completeQuiz(deckId, date).then(
-            () => dispatch(quizCompleted(deckId, date))
-        )
+        API.completeQuiz(deckId, date)
+            .then(() => dispatch(quizCompleted(deckId, date)))
+            .then(() => clearLocalNotification())
     }
 }

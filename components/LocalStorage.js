@@ -2,6 +2,7 @@ import React from 'react';
 import {
     Text,
     View,
+    ScrollView,
 } from 'react-native';
 import {
     Icon,
@@ -38,9 +39,9 @@ export default class LocalStorage extends React.Component {
                     {this.reloadDecks}
                     {this.resetDecks}
                 </View>
-                <View style={{ flex: 1, margin: 10, backgroundColor: "#333" }}>
+                <ScrollView style={{ flex: 1, margin: 10, backgroundColor: "#333" }}>
                     <Text style={{fontSize: 12, fontFamily: "monospace", color: "white"}}>{JSON.stringify(this.state.decks, null, 2)}</Text>
-                </View>
+                </ScrollView>
             </View>
         )
     }

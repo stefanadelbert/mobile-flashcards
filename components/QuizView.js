@@ -125,7 +125,7 @@ const QuizComplete = (props) => {
         raised
         name='repeat'
         type='material'
-        onPress={() => console.log("Repeat")}
+        onPress={props.onRepeat}
     />
     const correctIcon = <Icon
         name='check'
@@ -175,12 +175,19 @@ export default class QuizView extends React.Component {
             (n, i) => n + (i === Verdict.UNKNOWN),
             0
         );
+    } 
+    resetQuiz = () => {
+        this.setState({verdicts: this.state.verdicts.map(() => Verdict.UNKNOWN)});
     }
     render() {
         const {title, questions} = this.props.navigation.state.params;
         if (this.quizComplete()) {
             return <View style={{flex: 1}}>
-                <QuizComplete verdicts={this.state.verdicts} goBack={this.props.navigation.goBack}/>
+                <QuizComplete
+                    verdicts={this.state.verdicts}
+                    onRepeat={this.resetQuiz}
+                    goBack={this.props.navigation.goBack}
+                />
             </View>
         }
         return (

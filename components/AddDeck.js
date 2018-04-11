@@ -18,6 +18,8 @@ class AddDeck extends React.Component {
         const {addDeck, goBack} = this.props;
         const {title, description} = this.state;
 
+        console.log('AddDeck.submit', title, description);
+
         addDeck(title, description);
         goBack();
     }
@@ -28,6 +30,7 @@ class AddDeck extends React.Component {
             type='material'
             onPress={this.submit} 
         />
+        console.log('AddDeck.render', this.state);
         return (
             <View style={{flex: 1}}>
                 <FormLabel>Title</FormLabel>
@@ -44,7 +47,7 @@ class AddDeck extends React.Component {
 
 function mapDispatchToProps(dispatch, { navigation }) {
   return {
-    addDeck: (title) => dispatch(addDeck(title)),
+    addDeck: (title, description) => dispatch(addDeck(title, description)),
     goBack: () => navigation.goBack(),
   }
 }

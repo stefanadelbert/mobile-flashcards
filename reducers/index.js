@@ -1,6 +1,6 @@
 import {
-    DECK_ADDED,
     DECKS_ADDED,
+    DECK_ADDED,
     CARD_ADDED,
 } from '../actions';
 
@@ -15,8 +15,8 @@ export default function entries(state = {}, action) {
         case DECK_ADDED:
             return {
                 ...state,
-                [action.deck]: {
-                    title: action.deck,
+                [action.deckId]: {
+                    title: action.deckId,
                     description: action.description,
                     questions: []
                 }

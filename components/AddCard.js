@@ -45,7 +45,7 @@ class AddCard extends React.Component {
     }
 }
 
-function mapDispatchToProps(dispatch, { navigation }) {
+function mapDispatchToProps(dispatch, {navigation}) {
   return {
     addCardToDeck: (title, card) => dispatch(addCardToDeck(title, card)),
     goBack: () => navigation.goBack(),

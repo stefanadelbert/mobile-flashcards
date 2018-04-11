@@ -6,5 +6,6 @@ export function uuidv4() {
 }
 
 export function within24hrs(earlier, later) {
+    console.log('within24hrs', earlier, later);
     return (later - earlier) < (24 * 60 * 60 * 1000)
 }

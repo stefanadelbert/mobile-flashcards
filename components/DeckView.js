@@ -17,9 +17,10 @@ class DeckView extends React.Component {
     constructor(props) {
         super(props);
         this.alertButton = <Icon
-            name='warning'
+            name='announcement'
             type='material'
             iconStyle={{color: brand}}
+            containerStyle={{marginRight: 5}}
         />
     }
     render() {
@@ -47,14 +48,16 @@ class DeckView extends React.Component {
         );
         return (
             <View style={{flex: 1}}>
+                {displayAlert &&
+                    <View style={{marginTop: 20, flexDirection: "row", justifyContent: "center", alignItems: "center"}}>
+                        {this.alertButton}<Text style={{fontStyle: "italic"}}>No recent quiz</Text>
+                    </View>
+                }
                 <Card
                     title={title}
-                    containerStyle={{marginTop: 30, marginBottom: 30, borderBottomWidth: 5, borderRightWidth: 5}}
+                    containerStyle={{borderBottomWidth: 5, borderRightWidth: 5}}
                     style={{}}
                 >
-                    <View style={{position: "absolute", top: 0, right: 0}}>
-                        {displayAlert && this.alertButton}
-                    </View>
                     <Text style={styles.subtitle}>{questions.length} cards</Text>
                     <Text style={styles.body}>{description}</Text>
                 </Card>
@@ -91,12 +94,11 @@ const styles = StyleSheet.create({
 })
 
 function mapStateToProps (state, props) {
-    const {decks, quiz} = state;
-    console.log('DeckView.mapStateToProps', state, decks, quiz);
+    const {decks, quizzes} = state;
     const {title} = props.navigation.state.params;
     return {
         deck: decks[title],
-        quiz: quiz[title],
+        quiz: quizzes[title],
     }
 }
 

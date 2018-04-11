@@ -54,12 +54,12 @@ class Quiz extends React.Component {
     }
     constructor(props) {
         super(props);
-        API.getQuiz().then((quiz) => this.setState({quiz}));
+        API.getQuizzes().then((quiz) => this.setState({quiz}));
         this.reload = <Icon
             name='refresh'
             type='material'
             iconStyle={{color: "white"}}
-            onPress={() => API.getQuiz().then((quiz) => this.setState({quiz}))}
+            onPress={() => API.getQuizzes().then((quiz) => this.setState({quiz}))}
         />
     }
     render() {

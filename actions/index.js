@@ -3,6 +3,7 @@ import {
     DECKS_ADDED,
     DECK_ADDED,
     CARD_ADDED,
+    QUIZZES_ADDED,
     QUIZ_COMPLETED,
 } from './types.js';
 import uuidv4 from '../utils/helpers';
@@ -44,6 +45,21 @@ export function addDeck(title, description) {
 export function loadDecks() {
     return (dispatch) => API.getDecks().then(
         (decks) => dispatch(decksAdded(decks))
+    );
+}
+
+export function quizzesAdded(quizzes) {
+    console.log('actions.quizzesAdded', quizzes);
+    return {
+        type: QUIZZES_ADDED,
+        quizzes,
+    }
+}
+
+export function loadQuizzes() {
+    console.log('actions.loadQuizzes');
+    return (dispatch) => API.getQuizzes().then(
+        (quizzes) => dispatch(quizzesAdded(quizzes))
     );
 }
 

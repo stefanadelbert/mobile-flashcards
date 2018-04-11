@@ -6,7 +6,7 @@ import {View} from 'react-native';
 import {TabNavigator, StackNavigator} from 'react-navigation';
 
 import reducer from './reducers';
-import {loadDecks} from './actions';
+import {loadDecks, loadQuizzes} from './actions';
 import DeckListView from './components/DeckListView';
 import DeckView from './components/DeckView';
 import QuizView from './components/QuizView';
@@ -75,6 +75,7 @@ const store = createStore(
 );
 
 store.dispatch(loadDecks());
+store.dispatch(loadQuizzes());
 
 export default class App extends React.Component {
   render() {

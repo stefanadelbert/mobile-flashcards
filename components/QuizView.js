@@ -107,54 +107,60 @@ const QuizProgress = (props) => {
     )
 }   
 
-const QuizComplete = (props) => {
-    const numberCorrect = props.verdicts.reduce(
-        (n, verdict) => n + (verdict === Verdict.CORRECT),
-        0
-    );
-    const numberIncorrect = props.verdicts.reduce(
-        (n, verdict) => n + (verdict === Verdict.INCORRECT),
-        0
-    );
-    const finishButton = <Icon
-        raised
-        name='check'
-        type='material'
-        onPress={() => props.goBack()}
-    />
-    const repeatButton = <Icon
-        raised
-        name='repeat'
-        type='material'
-        onPress={props.onRepeat}
-    />
-    const correctIcon = <Icon
-        name='check'
-        type='material'
-        iconStyle={{color: green, fontSize: 18}}
-    />
-    const incorrectIcon = <Icon
-        name='clear'
-        type='material'
-        iconStyle={{color: red, fontSize: 12}}
-    />
-    return <View style={{flex: 1, alignItems: "stretch"}}>
-        <Text style={{textAlign: "center", fontSize: 24, margin: 20}}>Quiz complete</Text> 
-        <View style={{flexDirection:"row", justifyContent: "center"}}>
-            <View style={[quizCompleteStyle.tally, {backgroundColor: lightGreen}]}>
-                {correctIcon}
-                <Text>{numberCorrect}</Text> 
+class QuizComplete extends React.Component {
+    constructor(props) {
+        super(props);
+        this.props.onCompleteQuiz(this.props.title);
+    }
+    render() {
+        const numberCorrect = this.props.verdicts.reduce(
+            (n, verdict) => n + (verdict === Verdict.CORRECT),
+            0
+        );
+        const numberIncorrect = this.props.verdicts.reduce(
+            (n, verdict) => n + (verdict === Verdict.INCORRECT),
+            0
+        );
+        const finishButton = <Icon
+            raised
+            name='check'
+            type='material'
+            onPress={() => this.props.goBack()}
+        />
+        const repeatButton = <Icon
+            raised
+            name='repeat'
+            type='material'
+            onPress={this.props.onRepeat}
+        />
+        const correctIcon = <Icon
+            name='check'
+            type='material'
+            iconStyle={{color: green, fontSize: 18}}
+        />
+        const incorrectIcon = <Icon
+            name='clear'
+            type='material'
+            iconStyle={{color: red, fontSize: 12}}
+        />
+        return <View style={{flex: 1, alignItems: "stretch"}}>
+            <Text style={{textAlign: "center", fontSize: 24, margin: 20}}>Quiz complete</Text> 
+            <View style={{flexDirection:"row", justifyContent: "center", alignItems: "center"}}>
+                <View style={[quizCompleteStyle.tally, {backgroundColor: lightGreen}]}>
+                    {correctIcon}
+                    <Text>{numberCorrect}</Text> 
+                </View>
+                <View style={[quizCompleteStyle.tally, {backgroundColor: lightRed}]}>
+                    {incorrectIcon}
+                    <Text>{numberIncorrect}</Text> 
+                </View>
             </View>
-            <View style={[quizCompleteStyle.tally, {backgroundColor: lightRed}]}>
-                {incorrectIcon}
-                <Text>{numberIncorrect}</Text> 
+            <View style={{flexGrow: 1, flexDirection: "row", justifyContent: "flex-end", alignItems: "flex-end"}}>
+                {repeatButton}
+                {finishButton}
             </View>
         </View>
-        <View style={{flexGrow: 1, flexDirection: "row", justifyContent: "flex-end", alignItems: "flex-end"}}>
-            {repeatButton}
-            {finishButton}
-        </View>
-    </View>
+    }
 }
 
 class QuizView extends React.Component {
@@ -167,12 +173,9 @@ class QuizView extends React.Component {
         this.state.verdicts = questions.map(() => Verdict.UNKNOWN);
     }
     onChangeVerdict = (index, verdict) => {
-        const newVerdicts = Object.assign([], this.state.verdicts, {[index]: verdict});
-        this.setState({verdicts: newVerdicts});
-        if (this.quizComplete(newVerdicts)) {
-            const {title} = this.props.navigation.state.params;
-            this.props.completeQuiz(title);
-        }
+        this.setState({
+            verdicts: Object.assign([], this.state.verdicts, {[index]: verdict})
+        });
     }
     quizComplete = (verdicts) => {
         return 0 == verdicts.reduce(
@@ -188,7 +191,9 @@ class QuizView extends React.Component {
         if (this.quizComplete(this.state.verdicts)) {
             return <View style={{flex: 1}}>
                 <QuizComplete
+                    title={title}
                     verdicts={this.state.verdicts}
+                    onCompleteQuiz={this.props.completeQuiz}
                     onRepeat={this.resetQuiz}
                     goBack={this.props.navigation.goBack}
                 />

@@ -27,10 +27,11 @@ class DeckListView extends React.Component {
             )} 
         />
         const alertButton = <Icon
-            name='warning'
+            name='announcement'
             type='material'
             iconStyle={{color: brand}}
         />
+        console.log('DeckListView.render', this.props);
         return (
             <View style={{flex: 1}}>
                 <FlatList
@@ -39,9 +40,9 @@ class DeckListView extends React.Component {
                     renderItem={({item}) => {
                         const {title, questions} = this.props.decks[item]
                         const displayAlert = (
-                            this.props.quiz === undefined ||
-                            !this.props.quiz.hasOwnProperty(title) ||
-                            !within24hrs(this.props.quiz[title].date, Date.now())
+                            this.props.quizzes === undefined ||
+                            !this.props.quizzes.hasOwnProperty(title) ||
+                            !within24hrs(this.props.quizzes[title].date, Date.now())
                         );
                         return (
                             <TouchableOpacity
@@ -72,10 +73,10 @@ class DeckListView extends React.Component {
     }
 }
 
-function mapStateToProps ({decks, quiz}) {
+function mapStateToProps ({decks, quizzes}) {
     return {
         decks,
-        quiz,
+        quizzes,
     }
 }
 

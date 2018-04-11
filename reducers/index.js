@@ -5,16 +5,16 @@ import {
     DECK_ADDED,
     CARD_ADDED,
     QUIZ_COMPLETED,
+    QUIZZES_ADDED
 } from '../actions/types';
 
 function decks(state = {}, action) {
     switch (action.type) {
         case DECKS_ADDED:
-            const newState = {
+            return {
                 ...state,
                 ...action.decks
             };
-            return newState;
         case DECK_ADDED:
             return {
                 ...state,
@@ -38,15 +38,22 @@ function decks(state = {}, action) {
     }
 }
 
-function quiz(state = {}, action) {
+function quizzes(state = {}, action) {
     switch (action.type) {
+        case QUIZZES_ADDED: {
+            console.log('reducers.QUIZZES_ADDED', action);
+            return {
+                ...state,
+                ...action.quizzes
+            };
+        }
         case QUIZ_COMPLETED: {
             return {
                 ...state,
                 [action.deckId]: {
                     date: action.date
                 }
-            }
+            };
         }
         default:
             return state;
@@ -55,6 +62,6 @@ function quiz(state = {}, action) {
 
 export default combineReducers({
 	decks,
-    quiz,
+    quizzes,
 });
 

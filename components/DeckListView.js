@@ -63,7 +63,7 @@ class DeckListView extends React.Component {
                         )
                     }}
                 />
-                <View style={{flexGrow: 1, flexDirection: "row", justifyContent: "flex-end", alignItems: "flex-end"}}>
+                <View style={{position: "absolute", bottom: 0, right: 0}}>
                     {addDeckButton}
                 </View>
             </View>

@@ -87,7 +87,7 @@ export default class App extends React.Component {
         return (
             <Provider store={store}>
                 <View style={{flex: 1}}>
-                    <DevNavigator />
+                    <MainNavigator />
                 </View>
             </Provider>
         );

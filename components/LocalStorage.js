@@ -32,7 +32,6 @@ class Decks extends React.Component {
         />
     }
     render() {
-        console.log('LocalStorage.render', this.state);
         return (
             <View style={{flex: 1, margin: 5}}>
                 <View style={{flexDirection: "row", justifyContent: "flex-end", padding: 2, backgroundColor: "#444"}}>
@@ -63,7 +62,6 @@ class Quiz extends React.Component {
         />
     }
     render() {
-        console.log('LocalStorage.render', this.state);
         return (
             <View style={{flex: 1, margin: 5}}>
                 <View style={{flexDirection: "row", justifyContent: "flex-end", padding: 2, backgroundColor: "#444"}}>

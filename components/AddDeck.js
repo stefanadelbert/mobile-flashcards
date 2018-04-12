@@ -22,7 +22,6 @@ class AddDeck extends React.Component {
             .then(() => navigation.replace('Deck', {title}));
     }
     render() {
-        console.log('AddDeck.render', this.props.navigation);
         submitButton = <Icon
             raised
             name='check'

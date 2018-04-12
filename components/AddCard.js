@@ -18,7 +18,6 @@ class AddCard extends React.Component {
         const {addCardToDeck, goBack} = this.props;
         const {title} = this.props.navigation.state.params;
         const {question, answer} = this.state;
-        console.log('AddCard.submit', title, question, answer);
 
         addCardToDeck(title, {question, answer});
         goBack();

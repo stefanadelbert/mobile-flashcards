@@ -41,7 +41,6 @@ function decks(state = {}, action) {
 function quizzes(state = {}, action) {
     switch (action.type) {
         case QUIZZES_ADDED: {
-            console.log('reducers.QUIZZES_ADDED', action);
             return {
                 ...state,
                 ...action.quizzes

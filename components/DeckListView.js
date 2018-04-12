@@ -17,7 +17,6 @@ import {within24hrs} from '../utils/helpers';
 
 class DeckListView extends React.Component {
     render() {
-        console.log('DeckListView.render', this.props.decks);
         const addDeckButton = <Icon
             raised
             name='add'
@@ -31,7 +30,6 @@ class DeckListView extends React.Component {
             type='material'
             iconStyle={{color: brand}}
         />
-        console.log('DeckListView.render', this.props);
         return (
             <View style={{flex: 1}}>
                 <FlatList

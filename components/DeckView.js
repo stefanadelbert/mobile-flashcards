@@ -53,7 +53,6 @@ class DeckView extends React.Component {
                 'AddCard', {title}
             )} 
         />
-        console.log(this.props);
         const displayAlert = (
             this.props.quiz === undefined || !within24hrs(this.props.quiz.date, Date.now())
         );

@@ -2,7 +2,6 @@ import { AsyncStorage } from 'react-native'
 import { Notifications, Permissions } from 'expo'
 
 export function within24hrs(earlier, later) {
-    console.log('within24hrs', earlier, later);
     return (later - earlier) < (24 * 60 * 60 * 1000)
 }
 

@@ -37,7 +37,6 @@ export function getDecks() {
 
 export async function getDeck(title) {
     var decks = await AsyncStorage.getItem(DECKS_STORAGE_KEY);
-    console.log('api.getDeck', decks);
     return decks[title];
 }
 

@@ -48,7 +48,6 @@ export function loadDecks() {
 }
 
 export function quizzesAdded(quizzes) {
-    console.log('actions.quizzesAdded', quizzes);
     return {
         type: QUIZZES_ADDED,
         quizzes,
@@ -56,14 +55,12 @@ export function quizzesAdded(quizzes) {
 }
 
 export function loadQuizzes() {
-    console.log('actions.loadQuizzes');
     return (dispatch) => API.getQuizzes().then(
         (quizzes) => dispatch(quizzesAdded(quizzes))
     );
 }
 
 export function quizCompleted(deckId, date) {
-    console.log('action.quizComplete', deckId, date);
     return {
         type: QUIZ_COMPLETED,
         deckId,

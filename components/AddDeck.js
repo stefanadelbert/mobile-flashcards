@@ -15,22 +15,20 @@ class AddDeck extends React.Component {
         description: "",
     }
     submit = () => {
-        const {addDeck, goBack} = this.props;
+        const {addDeck, navigation} = this.props;
         const {title, description} = this.state;
 
-        console.log('AddDeck.submit', title, description);
-
-        addDeck(title, description);
-        goBack();
+        addDeck(title, description)
+            .then(() => navigation.replace('Deck', {title}));
     }
     render() {
+        console.log('AddDeck.render', this.props.navigation);
         submitButton = <Icon
             raised
             name='check'
             type='material'
             onPress={this.submit} 
         />
-        console.log('AddDeck.render', this.state);
         return (
             <View style={{flex: 1}}>
                 <FormLabel>Title</FormLabel>
@@ -48,7 +46,7 @@ class AddDeck extends React.Component {
 function mapDispatchToProps(dispatch, { navigation }) {
   return {
     addDeck: (title, description) => dispatch(addDeck(title, description)),
-    goBack: () => navigation.goBack(),
+    navigation,
   }
 }
 

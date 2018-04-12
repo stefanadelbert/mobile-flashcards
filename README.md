@@ -1,6 +1,6 @@
 # mobile-flashcards Project
 
-mobile-flashcards is an Android mobile app which allows you to manage decks of flashcards that can be used to quiz yourself and help you learn.
+`mobile-flashcards` is an mobile app for Android which allows you to manage decks of flashcards that can be used to quiz yourself and help you learn.
 
 ## Getting Started
 

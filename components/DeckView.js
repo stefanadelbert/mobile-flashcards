@@ -4,6 +4,7 @@ import {
     StyleSheet,
     Text,
     View,
+    TouchableOpacity,
 } from 'react-native';
 import {
     Card,
@@ -63,13 +64,17 @@ class DeckView extends React.Component {
                         {this.alertButton}<Text style={{fontStyle: "italic"}}>No recent quiz</Text>
                     </View>
                 }
-                <Card
-                    title={title}
-                    containerStyle={{borderBottomWidth: 5, borderRightWidth: 5}}
+                <TouchableOpacity
+                    onPress={() => this.props.navigation.navigate('Quiz', {title, questions})}
                 >
-                    <Text style={styles.body}>{description}</Text>
-                    <Text style={styles.footer}>{questions.length} cards</Text>
-                </Card>
+                    <Card
+                        title={title}
+                        containerStyle={{borderBottomWidth: 5, borderRightWidth: 5}}
+                    >
+                        <Text style={styles.body}>{description}</Text>
+                        <Text style={styles.footer}>{questions.length} cards</Text>
+            </Card>
+        </TouchableOpacity>
                 <LastQuizDate quiz={this.props.quiz}/>
                 <View style={{flexGrow: 1, flexDirection: "row", justifyContent: "flex-end", alignItems: "flex-end"}}>
                     {addCardButton}

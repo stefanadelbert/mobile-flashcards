@@ -13,6 +13,17 @@ import {
 import {white, brand, grey, red, blue} from '../utils/colors';
 import {within24hrs} from '../utils/helpers';
 
+const LastQuizDate = (props) => {
+    const time = (props.quiz === undefined)
+        ?  <Text style={styles.lastQuizDateText}>Never</Text>
+        : <Text style={styles.lastQuizDateText}>{new Date(props.quiz.date).toLocaleString()}</Text>
+    return (
+        <View style={{margin: 10, flexDirection: "row", justifyContent: "flex-end"}}>
+            <Text style={styles.lastQuizDateText}>Last quiz: </Text>{time}
+        </View>
+    )
+}
+
 class DeckView extends React.Component {
     constructor(props) {
         super(props);
@@ -56,11 +67,11 @@ class DeckView extends React.Component {
                 <Card
                     title={title}
                     containerStyle={{borderBottomWidth: 5, borderRightWidth: 5}}
-                    style={{}}
                 >
-                    <Text style={styles.subtitle}>{questions.length} cards</Text>
                     <Text style={styles.body}>{description}</Text>
+                    <Text style={styles.footer}>{questions.length} cards</Text>
                 </Card>
+                <LastQuizDate quiz={this.props.quiz}/>
                 <View style={{flexGrow: 1, flexDirection: "row", justifyContent: "flex-end", alignItems: "flex-end"}}>
                     {addCardButton}
                     {startQuizButton}
@@ -71,19 +82,6 @@ class DeckView extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    viewContainer: {
-        flex: 1,
-        alignItems: "center",
-    },
-    title: {
-        fontSize: 36,
-        textAlign: "center",
-    },
-    subtitle: {
-        fontSize: 18,
-        textAlign: "center",
-        color: grey,
-    },
     body: {
         fontSize: 12,
         fontStyle: "italic",
@@ -91,6 +89,19 @@ const styles = StyleSheet.create({
         margin: 20,
         color: grey,
     },
+    footer: {
+        fontSize: 12,
+        fontStyle: "italic",
+        textAlign: "right",
+        marginRight: 20,
+        marginLeft: 20,
+        color: grey,
+    },
+    lastQuizDateText: {
+        fontSize: 12,
+        fontStyle: "italic",
+        color: grey,
+    }
 })
 
 function mapStateToProps (state, props) {
